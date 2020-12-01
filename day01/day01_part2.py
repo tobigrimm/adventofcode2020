@@ -4,7 +4,7 @@ from operator import mul
 from functools import reduce
 from itertools import combinations
 
-def calc_2020(inlist: List[int], num: int = 2) -> Tuple[int, int]:
+def calc_2020(inlist: List[int], num: int = 2) -> Tuple[int, ...]:
     """compare all numbers in inlist with each other.
        If the sum of two numbers results in 2020,
        return the first two numbers as a tuple"""
