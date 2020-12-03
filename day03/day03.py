@@ -10,13 +10,12 @@ def navigate_slope(map: List[str], x_inc: int = 1, y_inc: int = 3) -> int:
     trees = 0
     while x < h:
         if map[x][y] == "#":
-            trees+=1
+            trees += 1
         x += x_inc
         # simulate the endless repeat to the right
-        y = (y+y_inc) % w
+        y = (y + y_inc) % w
 
     return trees
-
 
 
 if __name__ == "__main__":
@@ -26,8 +25,7 @@ if __name__ == "__main__":
     print(f"part 1: {part1} trees hit")
     result = 1
     # calculate the possible results
-    for x,y in [(1,1), (1,3), (1,5), (1,7), (2,1)]:
+    for x, y in [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]:
         result *= navigate_slope(map, x, y)
 
     print(f"part 2: {result} trees hit")
-    
