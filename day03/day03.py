@@ -1,21 +1,25 @@
 #!/usr/bin/env python3
 import sys
+from typing import List
 
 
-if __name__ == "__main__":
-    with open(sys.argv[1], "r") as infile:
-        map = [line.strip() for line in infile]
-
+def navigate_slope(map: List, x_inc: int = 1, y_inc: int = 3) -> int:
     h = len(map)
     w = len(map[0])
     x, y = 0, 0
     trees = 0
     while x < h:
         if map[x][y] == "#":
-            print(x,y,h,w)
             trees+=1
-        x += 1
+        x += x_inc
         # simulate the endless repeat to the right
-        y = (y+3) % w
+        y = (y+y_inc) % w
 
-    print(trees)
+    return trees
+
+
+
+if __name__ == "__main__":
+    with open(sys.argv[1], "r") as infile:
+        map = [line.strip() for line in infile]
+    print(f"part 1: {navigate_slope(map)} trees hit")
