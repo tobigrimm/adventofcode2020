@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import sys
 from typing import List
-from operator import mul
-from functools import reduce
 
 
 def navigate_slope(map: List[str], x_inc: int = 1, y_inc: int = 3) -> int:
@@ -26,9 +24,10 @@ if __name__ == "__main__":
         map = [line.strip() for line in infile]
     part1 = navigate_slope(map)
     print(f"part 1: {part1} trees hit")
-    results = []
+    result = 1
+    # calculate the possible results
     for x,y in [(1,1), (1,3), (1,5), (1,7), (2,1)]:
-        results.append(navigate_slope(map, x, y))
+        result *= navigate_slope(map, x, y)
 
-    print("part 2: ", reduce(mul, results, 1), " trees hit")
+    print(f"part 2: {result} trees hit")
     
