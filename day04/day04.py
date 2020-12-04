@@ -66,6 +66,8 @@ if __name__ == "__main__":
                 for value in line:
                     k, v = value.strip().split(":")
                     passport[k] = v
+        #append the last passport after the last line
+        passports.append(passport)
     print(
         "part 1: ",
         sum([check_passport(passport) for passport in passports]),
