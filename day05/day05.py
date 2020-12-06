@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import re
-from typing import Dict, List, Iterator, Generator, Any 
+from typing import List, Iterator, Generator, Any
 from itertools import islice
+
 
 def calculate_bsp(code: str, subrange: List[int]) -> List[int]:
     for char in code:
@@ -12,7 +12,8 @@ def calculate_bsp(code: str, subrange: List[int]) -> List[int]:
             subrange = subrange[int(len(subrange) / 2) :]
     return subrange
 
-def window(seq: Iterator[Any], n: int =2) -> Generator[Any, None, None]:
+
+def window(seq: Iterator[Any], n: int = 2) -> Generator[Any, None, None]:
     "Returns a sliding window (of width n) over data from the iterable"
     "   s -> (s0,s1,...s[n-1]), (s1,s2,...,sn), ...                   "
     "taken from https://docs.python.org/release/2.3.5/lib/itertools-example.html"
@@ -23,6 +24,7 @@ def window(seq: Iterator[Any], n: int =2) -> Generator[Any, None, None]:
     for elem in it:
         result = result[1:] + (elem,)
         yield result
+
 
 def calculate_seat(seat: str) -> int:
     column = calculate_bsp(seat[:7], list(range(128)))[0]
@@ -39,12 +41,12 @@ if __name__ == "__main__":
         max(all_seats),
         " is the highest seat code",
     )
-    for i,j,k in window(all_seats, 3):
-        if i == j-1 and j+1 == k:
+    for i, j, k in window(all_seats, 3):
+        if i == j - 1 and j + 1 == k:
             pass
         else:
-            if j+1 != k:
-                missing_seat  = j+1
+            if j + 1 != k:
+                missing_seat = j + 1
     print(
         "part 2: ",
         missing_seat,
