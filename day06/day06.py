@@ -1,35 +1,41 @@
 #!/usr/bin/env python3
 import sys
-import re
-from typing import Dict
+from typing import List, Set
 
-def len_group_yes(group: str) -> int:
-    return len(set(group))
+
+def check_group(group: List[Set[str]], part1: bool = True) -> int:
+    result = group[0]
+    for s in group[1:]:
+        if part1:
+            result = result.union(s)
+        else:
+            result = result.intersection(s)
+    return len(result)
+
 
 if __name__ == "__main__":
     with open(sys.argv[1], "r") as infile:
         groups = []
-        group = ""
+        group: List[Set[str]] = []
         for nextline in infile:
             line = nextline.strip().split()
             # check if new passport starts:
             if len(line) == 0:
                 groups.append(group)
-                group = ""
+                group = []
             else:
                 for value in line:
-                    group += value.strip()
-        #append the last passport after the last line
+                    group.append(set(value.strip()))
+        # append the last passport after the last line
         groups.append(group)
-    
-    
+
     print(
         "part 1: ",
-        sum([len_group_yes(group) for group in groups]),
+        sum([check_group(group) for group in groups]),
         " answered yes",
     )
-    # print(
-    #     "part 2: ",
-    #     sum([check_passport(passport, True) for passport in passports]),
-    #     " valid passports",
-    # )
+    print(
+        "part 2: ",
+        sum([check_group(group, False) for group in groups]),
+        " answered yes",
+    )
